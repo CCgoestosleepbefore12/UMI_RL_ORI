@@ -32,14 +32,12 @@ UMI_RL_ORI/
 ## 当前状态 / 下一步
 
 - [x] fork UMI、搭好骨架
-- [x] **方法选型已定**(详见 `docs/方法选型分析.md`):
-  - 约束:flow 策略 · 真机几十条 · sim 不确定 · reward 未定 · 工程优先
-  - 关键洞察:**瓶颈是 reward/value 信号,不是 RL 算法**——三家族都依赖它
-  - Phase 0(关键路径):定 + 建 reward/value 信号
-  - Phase 1(第一线):advantage-conditioned 微调(最省样本、风险最低)
-  - Phase 2(升级):Q-chunking critic + QAM
-  - 备选:世界模型想象(RISE 近亲)
-- [ ] **下一步:/grill Phase 0 的 reward/value 信号**(progress / 学习式 value / 稀疏+LOO / HIL 四选一)→ 填 spec.md → /plan
+- [x] **方法选型已定 + Phase 0 已 grill**(详见 `docs/方法选型分析.md`、`docs/adr/0001-*.md`、`docs/spec.md`):
+  - 约束:flow 策略 · 真机几十条 · sim 不确定 · 工程优先 · 有机械臂+遥操实时接管
+  - 失败模式拆两半:(a) 广泛泛化(靠数据,不碰)+ (b) 协变量漂移(RL/HIL 靶子);近期先锁窄场景做稳 (b)
+  - **关键决策:Phase 0 = HG-DAgger(纯 BC),不上 RL、不训 reward model** —— 绕开 flow-RL 复杂度税
+  - Phase 1(触发式):advantage-conditioned RL(想脱离人自改进 / BC 触顶时)→ Phase 2:QAM → 备选:世界模型
+- [ ] **下一步:对 Phase 0(HG-DAgger)/plan** —— 窄场景定义、HIL 接管协议、数据聚合与重训、收敛/触顶判据
 
 ## 工作流程(沿用全局 CLAUDE.md)
 
