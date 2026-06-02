@@ -32,9 +32,14 @@ UMI_RL_ORI/
 ## 当前状态 / 下一步
 
 - [x] fork UMI、搭好骨架
-- [ ] **方法选型未定**:flow 策略 RL 的三个家族 —— (A) Flow-SDE/把去噪当 MDP(pi_RL)、(B) critic 梯度蒸馏(QAM)、(C) advantage-conditioned 监督(RECAP/RISE,已读)。详见 docs/CONTEXT.md。
-- [ ] 下一步:深读 pi_RL + QAM → 定信号来源(真机/offline-to-online/世界模型)与奖励 → /grill 填 spec.md → /plan
-- 信号来源、奖励:**均未定**(应读够几篇后反推,不要凭感觉)
+- [x] **方法选型已定**(详见 `docs/方法选型分析.md`):
+  - 约束:flow 策略 · 真机几十条 · sim 不确定 · reward 未定 · 工程优先
+  - 关键洞察:**瓶颈是 reward/value 信号,不是 RL 算法**——三家族都依赖它
+  - Phase 0(关键路径):定 + 建 reward/value 信号
+  - Phase 1(第一线):advantage-conditioned 微调(最省样本、风险最低)
+  - Phase 2(升级):Q-chunking critic + QAM
+  - 备选:世界模型想象(RISE 近亲)
+- [ ] **下一步:/grill Phase 0 的 reward/value 信号**(progress / 学习式 value / 稀疏+LOO / HIL 四选一)→ 填 spec.md → /plan
 
 ## 工作流程(沿用全局 CLAUDE.md)
 
